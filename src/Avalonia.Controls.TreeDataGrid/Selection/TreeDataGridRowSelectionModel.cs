@@ -92,9 +92,10 @@ namespace Avalonia.Controls.Selection
                     if (!e.Handled && direction == NavigationDirection.Left
                         && anchor?.Rows is HierarchicalRows<T> hierarchicalRows && anchorRowIndex > 0)
                     {
-                        var newIndex = anchorRowIndex - hierarchicalRows[anchorRowIndex].ModelIndex - 1;
+                        var newIndex = hierarchicalRows.GetParentRowIndex(AnchorIndex);
                         UpdateSelection(sender, newIndex, true);
-                        sender.RowsPresenter.BringIntoView(newIndex); 
+                        sender.RowsPresenter.BringIntoView(newIndex);
+                        FocusManager.Instance.Focus(sender);
                     }
                 }
             }
