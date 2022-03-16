@@ -89,14 +89,12 @@ namespace Avalonia.Controls.Selection
                         e.Handled = MoveSelection(sender, direction.Value, shift, anchor);
                     }
 
-                    if (!e.Handled && direction == NavigationDirection.Left)
+                    if (!e.Handled && direction == NavigationDirection.Left
+                        && anchor?.Rows is HierarchicalRows<T> hierarchicalRows && anchorRowIndex > 0)
                     {
-                        if (anchor?.Rows is HierarchicalRows<T> hierarchicalRows && anchorRowIndex > 0)
-                        {
-                            var newIndex = anchorRowIndex - hierarchicalRows[anchorRowIndex].ModelIndex - 1;
-                            UpdateSelection(sender, newIndex, true);
-                            sender.RowsPresenter.BringIntoView(newIndex);
-                        }
+                        var newIndex = anchorRowIndex - hierarchicalRows[anchorRowIndex].ModelIndex - 1;
+                        UpdateSelection(sender, newIndex, true);
+                        sender.RowsPresenter.BringIntoView(newIndex); 
                     }
                 }
             }
