@@ -153,6 +153,7 @@ namespace Avalonia.Controls.Models.TreeDataGrid
             }
             return -1;
         }
+
         public int ModelIndexToRowIndex(IndexPath modelIndex)
         {
             if (modelIndex == default)
