@@ -97,6 +97,14 @@ namespace Avalonia.Controls.Selection
                         sender.RowsPresenter.BringIntoView(newIndex);
                         FocusManager.Instance.Focus(sender);
                     }
+
+                    if (!e.Handled && direction == NavigationDirection.Right
+                       && anchor?.Rows is HierarchicalRows<T> hierarchicalRows2 && hierarchicalRows2[anchorRowIndex].IsExpanded)
+                    {
+                        var newIndex = anchorRowIndex + 1;
+                        UpdateSelection(sender, newIndex, true);
+                        sender.RowsPresenter.BringIntoView(newIndex);
+                    }
                 }
             }
 
